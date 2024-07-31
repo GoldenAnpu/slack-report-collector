@@ -10,5 +10,5 @@ username = os.getenv("SLACK_USERNAME")
 
 json_filename = "slack_report_messages.json"
 txt_filename = "slack_report_messages.txt"
-date_from = "2024-06-01"
-date_to = "2024-06-29"
+date_from = "2024-07-01"
+date_to = "2024-07-31"
