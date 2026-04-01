@@ -3,3 +3,4 @@ slack_report_messages.txt
 .venv
 __pycache__
 local.env
+slack.env
