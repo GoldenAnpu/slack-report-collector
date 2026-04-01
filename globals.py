@@ -16,17 +16,21 @@ load_dotenv(os.path.join(os.path.dirname(__file__), "local.env"), override=False
 
 def _current_month_range() -> tuple[str, str]:
     today = datetime.now()
-    first = today.replace(day=1)
-    next_month = (first.replace(day=28) + timedelta(days=4)).replace(day=1)
-    last = next_month - timedelta(days=1)
-    return first.strftime("%Y-%m-%d"), last.strftime("%Y-%m-%d")
+    approx_from = today - timedelta(days=15)  # to get a rough estimate of the month
+    date_from = datetime(approx_from.year, approx_from.month, 1).strftime("%Y-%m-%d")
+    month_index = approx_from.month
+    last_day_of_month = (datetime(approx_from.year, month_index, 1) + timedelta(days=31)).replace(
+        day=1
+    ) - timedelta(days=1)
+    date_to = last_day_of_month.strftime("%Y-%m-%d")
+    return date_from, date_to
 
 
 _default_date_from, _default_date_to = _current_month_range()
 
-api_token   = os.getenv("SLACK_API_TOKEN")
-channel_id  = os.getenv("SLACK_CHANNEL_ID")
-username    = os.getenv("SLACK_USERNAME")
+api_token = os.getenv("SLACK_API_TOKEN")
+channel_id = os.getenv("SLACK_CHANNEL_ID")
+username = os.getenv("SLACK_USERNAME")
 report_type = os.getenv("REPORT_TYPE", "json")  # json | txt | slack
-date_from   = os.getenv("DATE_FROM", _default_date_from)
-date_to     = os.getenv("DATE_TO", _default_date_to)
+date_from = os.getenv("DATE_FROM", _default_date_from)
+date_to = os.getenv("DATE_TO", _default_date_to)

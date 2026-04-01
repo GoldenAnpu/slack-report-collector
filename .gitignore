@@ -4,3 +4,13 @@ slack_report_messages.txt
 __pycache__
 local.env
 slack.env
+reports/
+raw_reports/
+
+.pytest_cache/
+__pycache__/
+*.pyc
+.playwright-mcp
+.claude
+
+.DS_Store
